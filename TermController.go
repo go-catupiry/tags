@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-catupiry/catu"
+	"github.com/go-catupiry/metatags"
 	"github.com/labstack/echo/v4"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
@@ -361,8 +362,9 @@ func (ctl *TermController) FindOnePageHandler(c echo.Context) error {
 	ctx.Title = record.Text
 	ctx.BodyClass = append(ctx.BodyClass, "body-content-findOne")
 
-	ctx.MetaTags.Title = record.Text
-	ctx.MetaTags.Description = record.Description
+	mt := c.Get("metatags").(*metatags.HTMLMetaTags)
+	mt.Title = record.Text
+	mt.Description = record.Description
 
 	ctx.Pager.Count = count
 

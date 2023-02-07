@@ -220,7 +220,7 @@ func TermQueryAndCountReq(opts *TermQueryOpts) error {
 		query = query.Where("text LIKE ?", text+"%")
 	}
 
-	orderColumn, orderIsDesc, orderValid := helpers.ParseUrlQueryOrder(c.QueryParam("order"))
+	orderColumn, orderIsDesc, orderValid := helpers.ParseUrlQueryOrder(c.QueryParam("order"), c.QueryParam("sort"), c.QueryParam("sortDirection"))
 
 	if orderValid {
 		query = query.Order(clause.OrderByColumn{
